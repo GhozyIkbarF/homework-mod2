@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import Music_card from './Component/Music_card/Music-card.js'; 
+import Data from './Page/Data/Music-card'
 
 function App() {
   return (
     <div className="App">
-      <Music_card />
+      <Data />
     </div>
   );
 }

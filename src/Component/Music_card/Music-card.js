@@ -1,16 +1,15 @@
 import React from 'react'
 import './Music-card.css'
-import Data from '../Data/Data';
 
-export default function Music_card() {
+export default function Music_card({title, artist,url_image, url_spotify}) {
   return (
     <div className="card-wrapper">
-        <img src={Data.album.images[0].url} alt="" />
+        <img src={url_image} alt="" />
         <div className="copy-music">
-            <p className='song-title'>{Data.album.name}</p>
-            <p>{Data. artists[0].name}</p>
+          <p className='song-title'>{title}</p>
+          <p className='song-artist'>{artist}</p>
         </div>
-        <button type='' name='button'>play</button>
+        <a className='btn' href={url_spotify}>play</a>
     </div>
   )
 }
