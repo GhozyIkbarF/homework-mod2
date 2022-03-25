@@ -1,4 +1,8 @@
-const data = {
+import React from 'react'
+import Music_card from '../../Component/Music_card/Music-card'
+
+export default function Data() {
+  const data = {
     album: {
       album_type: "album",
       artists: [
@@ -74,5 +78,20 @@ const data = {
     type: "track",
     uri: "spotify:track:3z8h0TU7ReDPLIbEnYhWZb"
   };
-  
-  export default data;
+
+  const TITLE = data.album.name;
+  const ARTISTS = data.artists[0].name;
+  const URL_IMAGE = data.album.images[0].url;
+  const URL_SPOTIFY = data.album.external_urls.spotify;
+
+  return (
+    <div className='music-wrapper'>
+      <Music_card 
+        title={TITLE}
+        artist={ARTISTS}
+        url_image={URL_IMAGE}
+        url_spotify={URL_SPOTIFY} 
+      />  
+    </div>
+  )
+}
