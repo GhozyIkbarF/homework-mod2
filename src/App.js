@@ -1,10 +1,10 @@
 import './App.css';
-import Data from './Page/Data/Music-card'
+import Musicbox from './Page/Music-card/Music-card'
 
 function App() {
   return (
     <div className="App">
-      <Data />
+      <Musicbox />
     </div>
   );
 }
