@@ -1,5 +1,5 @@
 import './App.css';
-import Musicbox from './Page/Music-card/Music-card'
+import Musicbox from './Pages/Music-card/index'
 
 function App() {
   return (
