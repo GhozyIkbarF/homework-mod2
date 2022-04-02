@@ -5,6 +5,7 @@ import MUSIC_CARD from '../../Component/Music_card/Music-card'
 import SearchBar from '../../Component/searchBar/index'
 // import { Component } from 'react';
 import config from '../../Component/data/config';
+import Form_Playlist from '../../Component/Form/index'
 
 
 const Music_card = () => {
@@ -17,7 +18,7 @@ const Music_card = () => {
     useEffect(() => {
       const accessToken = new URLSearchParams(window.location.hash).get('#access_token');
       setAccess_token(accessToken);
-      setIsAuthorize(accessToken !== undefined);
+      setIsAuthorize(accessToken !== null);
     }, [])
 
     useEffect(() => {
@@ -72,6 +73,7 @@ const Music_card = () => {
           </main>
         )}
         
+          <Form_Playlist />
 
         {isAuthorize && (
           <main className="container" id="home">

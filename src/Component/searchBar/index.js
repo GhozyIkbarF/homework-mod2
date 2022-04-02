@@ -47,7 +47,7 @@ const SearchBar = ({ accessToken, onSuccess, onClearSearch }) => {
         <input
           type="text"
           placeholder='Artist, Song, Album...'
-          className='search_input'
+          className='search_input search_inputSong'
           required
           onChange={(e) => handleInput(e)} />
         <button type="submit" className='btn btn-search'>Search</button>
