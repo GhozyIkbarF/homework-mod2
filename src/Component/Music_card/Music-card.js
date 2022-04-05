@@ -2,8 +2,8 @@ import React from 'react'
 import './Music-card.css'
 import { useState } from 'react'
 
-export default function Music_card({title, artist,url_image, url_spotify, toggleSelect}) {
-  const [isSelected, setIsSelected] = useState(false);
+export default function Music_card({title, artist,url_image, url_spotify, select, toggleSelect}) {
+  const [isSelected, setIsSelected] = useState(select);
 
   const handleToggleSelect = () => {
     setIsSelected(!isSelected);
