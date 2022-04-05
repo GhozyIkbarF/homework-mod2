@@ -3,67 +3,83 @@ import './index.css'
 import { useState, useEffect } from 'react'
 import MUSIC_CARD from '../../Component/Music_card/Music-card'
 import SearchBar from '../../Component/searchBar/index'
-// import { Component } from 'react';
 import config from '../../Component/data/config';
-import Form_Playlist from '../../Component/Form/index'
+import CreatePlaylistForm from '../../Component/Form/index'
+import { getUserProfile } from '../../lib/fetchApi';
+import { toast } from 'react-toastify';
+import { useDocumentTitle } from '../../lib/customHooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../slice/authSlice';
 
 
 const Music_card = () => {
-    const [access_token, setAccess_token] = useState('');
-    const [isAuthorize, setIsAuthorize] = useState(false);
-    const [tracks, setTracks] = useState([]);
-    const [selectedTracksUri, setSelectedTracksUri] = useState([]);
-    const [isInSearch, setIsInSearch] = useState(false);
+  const [tracks, setTracks] = useState([]);
+  const [selectedTracksUri, setSelectedTracksUri] = useState([]);
+  const [selectedTracks, setSelectedTracks] = useState([]);
+  const [isInSearch, setIsInSearch] = useState(false);
+  const isAuthorize = useSelector((state) => state.auth.isAuthorize);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-      const accessToken = new URLSearchParams(window.location.hash).get('#access_token');
-      setAccess_token(accessToken);
-      setIsAuthorize(accessToken !== null);
-    }, [])
+  useDocumentTitle('Home - Spotipy');
 
-    useEffect(() => {
-      if (!isInSearch) {
-        const selectedTracks = filterSelectedTracks();
-  
-        setTracks(selectedTracks);
+  useEffect(() => {
+    const accessTokenParams = new URLSearchParams(window.location.hash).get('#access_token');
+
+    if (accessTokenParams !== null) {
+      const setUserProfile = async () => {
+        try {
+          const responseUser = await getUserProfile(accessTokenParams);
+
+          dispatch(login({
+            accessToken: accessTokenParams,
+            user: responseUser
+          }));
+        } catch (e) {
+          toast.error(e);
+        }
       }
-    }, [selectedTracksUri]);
 
-    const getSpotifyLinkAuthorize = () => {
-      const state = Date.now().toString()
-      const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID
-      return `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=http://localhost:3000&state=${state}&scope=${config.SPOTIFY_SCOPE}`;
-    };
-
-    const filterSelectedTracks = () => {
-      return tracks.filter((track) => selectedTracksUri.includes(track.uri));
+      setUserProfile();
     }
+  }, []);
 
-    const onSuccessSearch = (searchTracks) => {
-      setIsInSearch(true);
-      const selectedTracks = filterSelectedTracks();
-      const searchDistincTracks = searchTracks.filter((track) => !selectedTracksUri.includes(track.uri));
-  
-      setTracks([...selectedTracks, ...searchDistincTracks]);
-    }
-
-    const clearSearch = () => {
-      const selectedTracks = filterSelectedTracks();
-      
+  useEffect(() => {
+    if (!isInSearch) {
       setTracks(selectedTracks);
-      setIsInSearch(false);
     }
+  }, [selectedTracksUri, selectedTracks, isInSearch]);
 
-    const toggleSelect = (track) => {
-      const uri = track.uri;
-  
-      if (selectedTracksUri.includes(uri)) {
-        setSelectedTracksUri(selectedTracksUri.filter((item) => item !== uri));
-      } else {
-        setSelectedTracksUri([...selectedTracksUri, uri]);
-      }
+  const getSpotifyLinkAuthorize = () => {
+    const state = Date.now().toString();
+    const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+
+    return `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=http://localhost:3000&state=${state}&scope=${config.SPOTIFY_SCOPE}`;
+  }
+
+  const onSuccessSearch = (searchTracks) => {
+    setIsInSearch(true);
+
+    const selectedSearchTracks = searchTracks.filter((track) => selectedTracksUri.includes(track.uri));
+
+    setTracks([...new Set([...selectedSearchTracks, ...searchTracks])])
+  }
+
+  const clearSearch = () => {
+    setTracks(selectedTracks);
+    setIsInSearch(false);
+  }
+
+  const toggleSelect = (track) => {
+    const uri = track.uri;
+
+    if (selectedTracksUri.includes(uri)) {
+      setSelectedTracksUri(selectedTracksUri.filter((item) => item !== uri));
+      setSelectedTracks(selectedTracks.filter((item) => item.uri !== uri));
+    } else {
+      setSelectedTracksUri([...selectedTracksUri, uri]);
+      setSelectedTracks([...selectedTracks, track]);
     }
-    
+  }
     return (
       <div className="container">
         {!isAuthorize && (
@@ -73,13 +89,12 @@ const Music_card = () => {
           </main>
         )}
         
-          <Form_Playlist />
+        <CreatePlaylistForm uriTracks={selectedTracksUri}/>
 
         {isAuthorize && (
           <main className="container" id="home">
             <SearchBar
-              accessToken={access_token}
-              onSuccess={(tracks) => onSuccessSearch(tracks)}
+              onSuccess={onSuccessSearch}
               onClearSearch={clearSearch}
             />
 
@@ -101,6 +116,7 @@ const Music_card = () => {
                     title={song.name}
                     artist={song.artists[0].name}
                     url_spotify={song.external_urls.spotify}
+                    select={selectedTracksUri.includes(tracks.uri)}
                     toggleSelect={() => toggleSelect(song)}
                   />
                 ))}
