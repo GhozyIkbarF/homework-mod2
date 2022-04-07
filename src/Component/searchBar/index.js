@@ -1,5 +1,3 @@
-import React, { Component } from 'react'
-import config from '../data/config';
 import './index.css'
 import { useState } from 'react';
 import { searchTrack } from '../../lib/fetchApi';
