@@ -20,7 +20,7 @@ export default function Music_card({title, artist,url_image, url_spotify, select
         </div>
         <div className="play-music">
           <a className='btn btn-linkSpotify' href={url_spotify}>play</a>
-          <a className='btn' onClick={handleToggleSelect}>{isSelected ? 'Deselect' : 'Select'}</a>
+          <button className='btn' onClick={handleToggleSelect}>{isSelected ? 'Deselect' : 'Select'}</button>
         </div>
     </div>
   )
