@@ -76,6 +76,7 @@ const CreatePlaylist = () => {
                 }}>
 
                 {tracks.map((song) => (
+                  // eslint-disable-next-line react/jsx-pascal-case
                   <Music_card
                     key={song.id}
                     url_image={song.album.images[0].url}
