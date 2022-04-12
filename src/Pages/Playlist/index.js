@@ -58,7 +58,7 @@ const CreatePlaylist = () => {
       <div className="container">
         <CreatePlaylistForm uriTracks={selectedTracksUri}/>
 
-          <main className="container" id="home">
+          <main className="main"  id="home">
             <SearchBar
               onSuccess={onSuccessSearch}
               onClearSearch={clearSearch}
@@ -69,11 +69,7 @@ const CreatePlaylist = () => {
                 <p>{message}</p>
               )}
 
-              <div className="cards" style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: 'center',
-                }}>
+              <div className="music-box">
 
                 {tracks.map((song) => (
                   // eslint-disable-next-line react/jsx-pascal-case
