@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { searchTrack } from '../../lib/fetchApi';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
+import Button from '@mui/material/Button';
 
 const SearchBar = ({onSuccess, onClearSearch }) => {
   const accessToken = useSelector((state) => state.auth.accessToken);
@@ -45,7 +46,7 @@ const SearchBar = ({onSuccess, onClearSearch }) => {
         <button type="submit" className='btn btn-search'>Search</button>
       </form>
 
-      {!isClear && <button className='btn btn-clear' onClick={() => handleClear()}>Clear Search</button>}
+      {!isClear && <Button variant="contained" color="success" onClick={() => handleClear()}>Clear Search</Button>}
     </div>
   )
 }
