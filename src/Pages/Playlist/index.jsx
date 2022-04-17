@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../../Component/searchBar/index";
+import SearchBar from "../../Component/searchBar";
 import CreatePlaylistForm from "../../Component/Form/index";
 import "./index.css";
-import Music_card from "../../Component/Music_card/Music-card";
+import Track from "../../Component/Music_card/index";
 
 const CreatePlaylist = () => {
   const [tracks, setTracks] = useState([]);
@@ -73,7 +73,7 @@ const CreatePlaylist = () => {
 
                 {tracks.map((song) => (
                   // eslint-disable-next-line react/jsx-pascal-case
-                  <Music_card
+                  <Track
                     key={song.id}
                     url_image={song.album.images[0].url}
                     title={song.name}
