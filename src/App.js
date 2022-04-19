@@ -10,25 +10,24 @@ import { useSelector } from "react-redux";
 import CreatePlaylist from "./Pages/Playlist/index";
 import LoginPage from "./Pages/loginPage/index";
 
-function App() {
+const App = () => {
   const token = useSelector((state) => state.auth.accessToken);
   return (
     <div className="App">
-      {/* <Musicbox /> */}
       <Router>
-				<Switch>
-					<Route path="/create-playlist">
-						{token !== "" ? <CreatePlaylist /> : <Redirect to="/" />}
-					</Route>
-					<Route exact path="/">
-						{token !== "" ? (
-							<Redirect to="/create-playlist" />
-						) : (
-							<LoginPage />
-						)}
-					</Route>
-				</Switch>
-			</Router>
+			<Switch>
+				<Route path="/create-playlist">
+					{token !== "" ? <CreatePlaylist /> : <Redirect to="/" />}
+				</Route>
+				<Route exact path="/">
+					{token !== "" ? (
+						<Redirect to="/create-playlist" />
+					) : (
+						<LoginPage />
+					)}
+				</Route>
+			</Switch>
+		</Router>
     </div>
   );
 }

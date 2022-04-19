@@ -69,7 +69,7 @@ const CreatePlaylist = () => {
                 <p>{message}</p>
               )}
 
-              <div className="music-box">
+              <div className="music-box" data-testid = "tracks-list">
 
                 {tracks.map((song) => (
                   // eslint-disable-next-line react/jsx-pascal-case
