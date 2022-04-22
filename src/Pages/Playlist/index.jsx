@@ -3,6 +3,8 @@ import SearchBar from "../../Component/searchBar";
 import CreatePlaylistForm from "../../Component/Form/index";
 import "./index.css";
 import Track from "../../Component/Music_card/index";
+import Navbar from "../../Component/Navbar";
+
 
 const CreatePlaylist = () => {
   const [tracks, setTracks] = useState([]);
@@ -56,6 +58,10 @@ const CreatePlaylist = () => {
   console.log(selectedTracksUri)
     return (
       <div className="container">
+        <div className="navbar">
+          <Navbar />
+        </div>
+        
         <CreatePlaylistForm uriTracks={selectedTracksUri}/>
 
           <main className="main"  id="home">

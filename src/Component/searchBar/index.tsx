@@ -44,7 +44,7 @@ const SearchBar: React.FC<IProps> = ({ onSuccess, onClearSearch }) => {
 
     return(
       <div className="search-bar">
-        <form action="" onSubmit={handleSubmit}>
+        <form className='form-searchSong' action="" onSubmit={handleSubmit}>
           <input
             data-testid = "search-input"
             type="text"
@@ -61,7 +61,12 @@ const SearchBar: React.FC<IProps> = ({ onSuccess, onClearSearch }) => {
           </button>
         </form>
 
-        {!isClear && <Button variant="contained" color="success" onClick={handleClear}>Clear Search</Button>}
+        {!isClear && 
+          <Button sx={{ backgroundColor: '#00BD68', color: '#000', '&:hover': {
+            backgroundColor: '#00BD68',
+            opacity: [0.9, 0.8, 0.7],
+            }, }} onClick={handleClear}>Clear Search
+          </Button>}
     </div>
     )
 }
