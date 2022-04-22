@@ -36,6 +36,9 @@ const LoginPage = () => {
 	return (
 		<div className="home">
 			<Navbar />
+			<div className="welcome">
+				<h1 className="sambutan">Welcome to Spotify</h1>
+			</div>
 		</div>
 	);
 };

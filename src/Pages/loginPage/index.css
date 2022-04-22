@@ -3,3 +3,14 @@
     padding-left: 20px;
     margin-top: 50px;
 }
+.welcome{
+    margin-top:210px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.sambutan{
+    color: #00BD68;
+    font-size: 70px;    
+}
