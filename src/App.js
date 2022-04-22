@@ -11,23 +11,23 @@ import CreatePlaylist from "./Pages/Playlist/index";
 import LoginPage from "./Pages/loginPage/index";
 
 const App = () => {
-  const token = useSelector((state) => state.auth.accessToken);
+  const isLogin = useSelector((state) => state.auth.isLogin);
   return (
     <div className="App">
       <Router>
-			<Switch>
-				<Route path="/create-playlist">
-					{token !== "" ? <CreatePlaylist /> : <Redirect to="/" />}
-				</Route>
-				<Route exact path="/">
-					{token !== "" ? (
-						<Redirect to="/create-playlist" />
-					) : (
-						<LoginPage />
-					)}
-				</Route>
-			</Switch>
-		</Router>
+      <Switch>
+        <Route path={"/create-playlist"}>
+          {isLogin ? (
+            <CreatePlaylist />
+          ):(
+            <Redirect to={"/"}/>
+        )}
+        </Route>
+        <Route path={"/"} >
+          <LoginPage/>
+        </Route>
+      </Switch>
+    </Router>
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import config from "../../Component/data/config";
 import { getUserProfile } from "../../lib/fetchApi";
 import { login } from "../../slice/authSlice";
 import "./index.css";
+import Navbar from "../../Component/Navbar";
 
 const LoginPage = () => {
 	const dispatch = useDispatch();
@@ -33,20 +33,9 @@ const LoginPage = () => {
 		}
 	});
 
-	const getSpotifyLinkAuth = () => {
-		const state = Date.now().toString();
-		const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-
-		return `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${config.BASE_URL}&state=${state}&scope=${config.SPOTIFY_SCOPE}`;
-	};
-
 	return (
 		<div className="home">
-			<div className="auth__content">
-					<a className="btn btn-login" href={getSpotifyLinkAuth()}>
-						LOG IN WITH SPOTIFY
-					</a>
-			</div>
+			<Navbar />
 		</div>
 	);
 };
