@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { TRootState } from '../../store';
 import Button from '@mui/material/Button';
+import './index.css';
 
 interface IProps {
   onSuccess: (tracks: any[], text: string) => void;

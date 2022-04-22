@@ -1,5 +1,5 @@
-form{
-    margin: 50px 0;;
+.search-bar{
+    margin-top: 50px;
 }
 .search_input{
     padding: 10px 20px;
@@ -12,7 +12,7 @@ form{
 .search_inputSong{
     width: 400px;
 }
-.btn{
+.btn-search{
     text-decoration: none;
     background-color: rgb(66, 235, 50);
     background-color: initial;
@@ -36,11 +36,9 @@ form{
     text-align: center;
     /* font-weight: bold; */
     font-size: 15px;
-}
-
-.btn-search{
     width: 80px;
     padding: 10px 20px 10px 18px;
     border-radius: 24px;
     margin: 0 10px;
 }
+
