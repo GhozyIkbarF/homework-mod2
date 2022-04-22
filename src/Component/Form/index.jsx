@@ -78,7 +78,7 @@ const CreatePlaylistForm = ({ uriTracks }) => {
         <div className="title-playlist">
             <label htmlFor="name">Title</label>
             <input
-                className='search_input ' 
+                className='search_input' 
                 type="text" 
                 label="Title"
                 placeholder="Title of playlist"
